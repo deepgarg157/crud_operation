@@ -65,9 +65,8 @@ async function controllerUserDelete(req, res) {
 
 
 async function controllerUserUpdate(req, res) {
-    const { _id, name, email,number } = req.body
     try {
-        const updateUser = await userModel.updateOne({name, email, number, _id})
+        const updateUser = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
         return res.status(201).json({
             success: true,
             message: 'user update successfully',

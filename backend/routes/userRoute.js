@@ -5,6 +5,6 @@ const { controllerUserCreate, controllerUserAllData, controllerUserDelete, contr
 router.post('/user/create', controllerUserCreate)
 router.get('/user/allData', controllerUserAllData)
 router.delete('/user/delete/:id', controllerUserDelete)
-router.put('/user/update', controllerUserUpdate)
+router.put('/user/update/:id', controllerUserUpdate)
 
 module.exports = router

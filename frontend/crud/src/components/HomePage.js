@@ -7,6 +7,7 @@ const HomePage = () => {
 
     const [closeForm, setCloseForm] = useState(false)
     const [editForm, setEditForm] = useState(false)
+    const [editId, setEditId] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -17,7 +18,6 @@ const HomePage = () => {
         name: '',
         email: '',
         number: '',
-        _id:''
     })
 
     const handleClose = () => {
@@ -94,15 +94,15 @@ const HomePage = () => {
     const handleEdit = (data) => {
         setEditForm(true)
         setEditData(data)
+        setEditId(data._id)
     }
 
     // update the user data
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const { name, email, number, _id } = editData
-            const res = await axios.put('http://localhost:4000/user/v1/api/user/update', {name, email, number, _id})
-            if(res.data.success){
+            const res = await axios.put(`http://localhost:4000/user/v1/api/user/update/${editId}`, editData)
+            if (res.data.success) {
                 toast.success(res.data.message)
                 setEditForm(false)
                 getAllUserData()
